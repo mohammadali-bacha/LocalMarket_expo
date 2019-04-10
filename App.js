@@ -5,16 +5,15 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 
 import ListScreen from './src/pages/ListScreen'
-import CategoriesScreen from './src/pages/CategoriesScreen'
 import TrackScreen from './src/pages/TrackScreen'
-import FavoritesScreen from './src/pages/FavoritesScreen'
+import BasketScreen from './src/pages/BasketScreen'
 import MoreScreen from './src/pages/MoreScreen'
 
 const TabNavigator = createBottomTabNavigator(
   {
     Liste: ListScreen,
     Suivi: TrackScreen,
-    Panier: MoreScreen,
+    Panier: BasketScreen,
     Plus: MoreScreen
   },
   {
