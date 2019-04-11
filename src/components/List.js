@@ -12,18 +12,24 @@ export default class extends React.Component {
     }
 
     componentDidMount() {
-        fetch(this.props.uri)
-        .then(res => res.json())
-        .then(data => {
-          this.setState({ data })
-        })
+        if (this.props.filter) {
+            this.setState({ data: this.props.data.filter(this.props.filter) })
+        } else {
+            this.setState({ data: this.props.data })
+        }
     }
+
+    
     render() {
-        return <FlatList
+        return (
+          <FlatList
             style={{ zIndex: -1, ...this.props.style }}
             data={this.state.data}
             keyExtractor={(item, id) => id.toString()}
-            renderItem={({ item }) => <ListItem {...item} />}
-        />
+            renderItem={({ item }) => (
+              <ListItem item={item} onPress={this.props.onPress} />
+            )}
+          />
+        );
     }
 }

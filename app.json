@@ -1,5 +1,6 @@
 {
   "expo": {
+    "primaryColor": "#a5cd39",
     "name": "Local Market",
     "slug": "local-market",
     "privacy": "public",
@@ -24,6 +25,9 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "androidStatusBar": {
+      "backgroundColor": "#93bce3e"
     }
   }
 }

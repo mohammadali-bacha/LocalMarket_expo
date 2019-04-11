@@ -12,7 +12,7 @@ import MoreScreen from './src/pages/MoreScreen'
 
 const TabNavigator = createBottomTabNavigator(
   {
-    Liste: ListScreen,
+    Produits: ListScreen,
     Suivi: TrackScreen,
     Panier: MoreScreen,
     Plus: MoreScreen
@@ -23,7 +23,7 @@ const TabNavigator = createBottomTabNavigator(
         const { routeName } = navigation.state;
         let IconComponent = Ionicons;
         let iconName;
-        if (routeName === "Liste") {
+        if (routeName === "Produits") {
           iconName = `ios-list${focused ? "" : ""}`;
         } else if (routeName === "Suivi") {
           iconName = `ios-pin${focused ? "" : ""}`;
