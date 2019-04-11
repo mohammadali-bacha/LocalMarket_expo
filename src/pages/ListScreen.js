@@ -1,18 +1,34 @@
 import React from 'react'
-import { View, Text, Platform } from 'react-native'
-import { Container, Header, Body, Item, Input, Icon, Right, Button, Tabs, Tab, ScrollableTab } from 'native-base'
+import { View, Text, Platform, ActivityIndicator } from 'react-native'
+import { Container, Header, Item, Input, Icon, Right, Button, Tabs, Tab, ScrollableTab } from 'native-base'
 import List from '../components/List'
+import ProductModal from '../components/ProductModal'
 
 export default class extends React.Component {
 
-  constructor() {
-    super()
+  state = {
+    products: [],
+    categories: []
+  }
 
-    this.state = {
-      products: []
-    }
+  modal = null
 
-    
+  componentDidMount() {
+    fetch('http://192.168.1.69:1337/product')
+      .then(res => res.json())
+      .then(products => {
+        this.setState({ products })
+      })
+    fetch('http://192.168.1.69:1337/category')
+      .then(res => res.json())
+      .then(categories => {
+        this.setState({ categories })
+      })
+  }
+
+  openModal(selected) {
+    this.setState({ selected })
+    this.modal.setVisible(true)
   }
 
   render() {
@@ -38,63 +54,41 @@ export default class extends React.Component {
             </Button>
           </Right>
         </Header>
-        <Tabs
-          renderTabBar={() => (
-            <ScrollableTab
-              // tabStyle={{ backgroundColor: "#a5cd39" }}
-              // textStyle={{ color: "#fff" }}
-              // activeTabStyle={{ backgroundColor: "#a5cd39" }}
-              // activeTextStyle={{ color: "#fff", fontWeight: "normal" }}
-            />
-          )}
-        >
-          <Tab
-            tabStyle={{ backgroundColor: "#a5cd39" }}
-            textStyle={{ color: "#fff" }}
-            activeTabStyle={{ backgroundColor: "#a5cd39" }}
-            activeTextStyle={{ color: "#fff", fontWeight: "normal" }}
-            heading="Tout"
-          >
-            <List uri="http://localhost:1337/product" />
-          </Tab>
-          <Tab
-            tabStyle={{ backgroundColor: "#a5cd39" }}
-            textStyle={{ color: "#fff" }}
-            activeTabStyle={{ backgroundColor: "#a5cd39" }}
-            activeTextStyle={{ color: "#fff", fontWeight: "normal" }}
-            heading="Légumes"
-          >
-            <List uri="http://localhost:1337/product" />
-          </Tab>
-          <Tab
-            tabStyle={{ backgroundColor: "#a5cd39" }}
-            textStyle={{ color: "#fff" }}
-            activeTabStyle={{ backgroundColor: "#a5cd39" }}
-            activeTextStyle={{ color: "#fff", fontWeight: "normal" }}
-            heading="Fruits"
-          />
-          <Tab
-            tabStyle={{ backgroundColor: "#a5cd39" }}
-            textStyle={{ color: "#fff" }}
-            activeTabStyle={{ backgroundColor: "#a5cd39" }}
-            activeTextStyle={{ color: "#fff", fontWeight: "normal" }}
-            heading="Produits laitier"
-          />
-          <Tab
-            tabStyle={{ backgroundColor: "#a5cd39" }}
-            textStyle={{ color: "#fff" }}
-            activeTabStyle={{ backgroundColor: "#a5cd39" }}
-            activeTextStyle={{ color: "#fff", fontWeight: "normal" }}
-            heading="Viande"
-          />
-          <Tab
-            tabStyle={{ backgroundColor: "#a5cd39" }}
-            textStyle={{ color: "#fff" }}
-            activeTabStyle={{ backgroundColor: "#a5cd39" }}
-            activeTextStyle={{ color: "#fff", fontWeight: "normal" }}
-            heading="Autre"
-          />
-        </Tabs>
+        {this.state.products.length === 0 && <ActivityIndicator />}
+        {this.state.products.length !== 0 && (
+          <Tabs renderTabBar={() => <ScrollableTab />}>
+            <Tab 
+              tabStyle={{ backgroundColor: "#a5cd39" }}
+              textStyle={{ color: "#fff" }}
+              activeTabStyle={{ backgroundColor: "#a5cd39" }}
+              activeTextStyle={{ color: "#fff", fontWeight: "normal" }}
+              heading="Tout">
+              <List
+                onPress={this.openModal.bind(this)}
+                data={this.state.products}
+              />
+            </Tab>
+            {this.state.categories.length !== 0 &&
+              this.state.categories.map((category, key) => (
+                <Tab 
+                  tabStyle={{ backgroundColor: "#a5cd39" }}
+                  textStyle={{ color: "#fff" }}
+                  activeTabStyle={{ backgroundColor: "#a5cd39" }}
+                  activeTextStyle={{ color: "#fff", fontWeight: "normal" }}
+                  key={key.toString()} heading={category.name}>
+                  <List
+                    onPress={this.openModal.bind(this)}
+                    data={this.state.products}
+                    filter={item => item.type.category === category.id}
+                  />
+                </Tab>
+              ))}
+          </Tabs>
+        )}
+        <ProductModal
+          ref={m => (this.modal = m)}
+          item={this.state.selected}
+        />
       </Container>
     );
   }
