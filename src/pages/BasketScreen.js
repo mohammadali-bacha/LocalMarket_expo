@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { removeProduct } from '../store/cart';
-class BasketScreen extends React.Component {
+export default class BasketScreen extends React.Component {
 
   render() {
     return (
@@ -13,12 +13,12 @@ class BasketScreen extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  cart: state
-}
+// const mapStateToProps = state => {
+//   cart: state
+// }
 
-const mapDispatchToProps = dispatch => {
-  remove: id => dispatch(removeProduct(id))
-}
+// const mapDispatchToProps = dispatch => {
+//   remove: id => dispatch(removeProduct(id))
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BasketScreen)
+// export default connect(mapStateToProps, mapDispatchToProps)(BasketScreen)

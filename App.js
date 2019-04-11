@@ -12,6 +12,7 @@ import ListScreen from './src/pages/ListScreen'
 import TrackScreen from './src/pages/TrackScreen'
 import BasketScreen from './src/pages/BasketScreen'
 import MoreScreen from './src/pages/MoreScreen'
+import LoginScreen from './src/pages/LoginScreen';
 
 const TabNavigator = createBottomTabNavigator(
   {
@@ -50,6 +51,7 @@ export default class extends React.Component {
     return (
       <Provider store={store}>
         <App />
+        <LoginScreen/>
       </Provider>
     )
   }
