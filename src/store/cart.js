@@ -2,10 +2,11 @@ const initialState = {
     products: []
 }
 
-export const addToCart = product => {
+export const addProduct = (product, qty) => {
     return {
         type: 'ADD_TO_CART',
-        product
+        product,
+        qty
     }
 }
 
@@ -16,14 +17,25 @@ export const removeProduct = id => {
     }
 }
 
-export default (state = [], action) => {
+export const updateProduct = (id, qty) => {
+    return {
+        type: 'UPDATE_PRODUCT',
+        qty
+    }
+}
 
+const initialState = {
+    cart: []
+}
+
+export default (state = [], action) => {
+    action.product
     switch (action.type) {
         case 'ADD_TO_CART':
-            state = [...state, action.product]
+            state = [...state, { product: action.product, qty: action.qty}]
             return state
         case 'REMOVE_PRODUCT':
-            state = state.filter(product => product.id !== action.product.id)
+            state = state.cart.filter(product => product.id !== action.product.id)
             return state
         default:
             return state
