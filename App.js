@@ -3,6 +3,10 @@ import { Text, View } from 'react-native';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation'
 import Ionicons from "react-native-vector-icons/Ionicons";
 
+import { Provider } from 'react-redux'
+
+// import store from './src/store'
+
 
 import ListScreen from './src/pages/ListScreen'
 import TrackScreen from './src/pages/TrackScreen'
@@ -37,5 +41,5 @@ const TabNavigator = createBottomTabNavigator(
     })
   }
 );
-
+// export default () => <Provider>{createAppContainer(TabNavigator)}</Provider>
 export default createAppContainer(TabNavigator)

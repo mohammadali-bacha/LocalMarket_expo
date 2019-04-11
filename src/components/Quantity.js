@@ -22,7 +22,7 @@ export default class extends React.Component {
               </Content>
             </Container>
             <Button success icon rounded>
-              <Icon name="arrow-forward" />
+              <Icon name="fa fa-plus" />
             </Button>
           </View>
         )

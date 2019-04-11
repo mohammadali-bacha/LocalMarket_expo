@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, Platform, ActivityIndicator } from 'react-native'
 import { Container, Header, Item, Input, Icon, Right, Button, Tabs, Tab, ScrollableTab } from 'native-base'
 import List from '../components/List'
+import Modal from '../components/Modal'
 import ProductModal from '../components/ProductModal'
 
 export default class extends React.Component {
@@ -14,12 +15,13 @@ export default class extends React.Component {
   modal = null
 
   componentDidMount() {
-    fetch('http://192.168.1.69:1337/product')
+    const uri = 'https://afternoon-mountain-33942.herokuapp.com'
+    fetch(`${uri}/product`)
       .then(res => res.json())
       .then(products => {
         this.setState({ products })
       })
-    fetch('http://192.168.1.69:1337/category')
+    fetch(`${uri}/category`)
       .then(res => res.json())
       .then(categories => {
         this.setState({ categories })
@@ -85,10 +87,12 @@ export default class extends React.Component {
               ))}
           </Tabs>
         )}
-        <ProductModal
+        <Modal
           ref={m => (this.modal = m)}
           item={this.state.selected}
-        />
+        >
+          <ProductModal item={this.state.selected} />
+        </Modal>
       </Container>
     );
   }
