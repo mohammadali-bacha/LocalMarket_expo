@@ -2,14 +2,31 @@ const initialState = {
     products: []
 }
 
-export default (state = initialState, action) => {
+export const addToCart = product => {
+    return {
+        type: 'ADD_TO_CART',
+        product
+    }
+}
+
+export const removeProduct = id => {
+    return {
+        type: 'REMOVE_PRODUCT',
+        id
+    }
+}
+
+export default (state = [], action) => {
 
     switch (action.type) {
         case 'ADD_TO_CART':
-            state.products = [...state.products, action.product]
-            break;
-        case 'REMOVE_TO_CART':
-            state.products = state.products.filter(product => product.id !== action.product.id)
-            break
+            state = [...state, action.product]
+            return state
+        case 'REMOVE_PRODUCT':
+            state = state.filter(product => product.id !== action.product.id)
+            return state
+        default:
+            return state
     }
+
 }

@@ -5,7 +5,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { Provider } from 'react-redux'
 
-// import store from './src/store'
+import store from './src/store'
 
 
 import ListScreen from './src/pages/ListScreen'
@@ -41,5 +41,16 @@ const TabNavigator = createBottomTabNavigator(
     })
   }
 );
-// export default () => <Provider>{createAppContainer(TabNavigator)}</Provider>
-export default createAppContainer(TabNavigator)
+
+const App = createAppContainer(TabNavigator)
+export default class extends React.Component {
+
+
+  render() {
+    return (
+      <Provider store={store}>
+        <App />
+      </Provider>
+    )
+  }
+}
