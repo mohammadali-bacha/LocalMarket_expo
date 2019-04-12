@@ -36,7 +36,7 @@ class BasketScreen extends React.Component {
             />
           )}
         />
-        <View>
+        <View style={{ flex: 1, flexGrow: 1 }}> 
         {
           this.props.price.length > 0 && (
             <Button full rounded style={styles.btn} onPress={() => {
