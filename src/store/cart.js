@@ -20,6 +20,12 @@ export const addProduct = (product, qty) => {
   }
 }
 
+export const clearCart = () => {
+  return {
+    type: 'CLEAR_CART'
+  }
+}
+
 export const removeProduct = id => {
   return {
     type: 'REMOVE_PRODUCT',
@@ -55,6 +61,9 @@ export default (state = initialState, action) => {
     case 'UPDATE_PRODUCT':
       newState.products.find(item => item.product.id === action.id).qty += action.qty
       return newState
+    case 'CLEAR_CART':
+      return { products: [] }
+    
     default:
       return newState
   }
