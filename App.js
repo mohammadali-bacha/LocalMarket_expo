@@ -21,6 +21,8 @@ import { connect } from 'react-redux'
 import LoginScreen from './src/pages/LoginScreen';
 import { Font, AppLoading } from "expo";
 
+import NavigationService from './src/services/NavigationService'
+
 
 
 const TabNavigator = createBottomTabNavigator(
@@ -82,7 +84,11 @@ export default class extends React.Component {
       return (
         <StyleProvider style={getTheme(material)}>
             <Provider store={store}>
-              <App />
+              <App 
+                ref={navigatorRef => {
+                  NavigationService.setTopLevelNavigator(navigatorRef);
+                }}
+              />
               <LoginScreen />
             </Provider>
           </StyleProvider>

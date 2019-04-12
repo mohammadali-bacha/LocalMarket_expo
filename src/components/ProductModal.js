@@ -97,7 +97,8 @@ const styles = StyleSheet.create({
     fontWeight: '600'
   },
   body: {
-    marginTop: 40
+    marginTop: 40,
+    height: 400
   },
   bodyContent: {
     flex: 1,
