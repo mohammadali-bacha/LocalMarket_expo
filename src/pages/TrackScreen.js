@@ -28,10 +28,10 @@ import { Header, Container, Right, Left, Body, Title } from 'native-base'
 
 // const LATITUDE = 29.95539;
 // const LONGITUDE = 78.07513;
-const LATITUDE_DELTA = 0.009;
-const LONGITUDE_DELTA = 0.009;
-const LATITUDE = 37.78825;
-const LONGITUDE = -122.4324;
+const LATITUDE_DELTA = 0.03
+const LONGITUDE_DELTA = 0.03
+const LATITUDE = 45.76426
+const LONGITUDE = 4.835293
 
 class AnimatedMarkers extends React.Component {
   constructor(props) {
