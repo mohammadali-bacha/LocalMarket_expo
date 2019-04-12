@@ -1,6 +1,7 @@
 import React from 'react'
 import { TouchableOpacity, View, Text, ActivityIndicator } from 'react-native'
 import { Image } from 'react-native-elements'
+import { primary, secondary } from '../../native-base-theme/variables/material';
 
 export default ({ item, onPress }) => {
     return (
@@ -36,7 +37,7 @@ export default ({ item, onPress }) => {
             <View
               style={{ alignItems: "center", justifyContent: "center" }}
             >
-              <Text style={{ fontWeight: "700", color: "green" }}>
+              <Text style={{ fontWeight: "700", color: 'green' }}>
                 {item.price}€/{item.metrics}
               </Text>
             </View>

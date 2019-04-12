@@ -1,8 +1,21 @@
 const initialState = {
-    user: null
+    loggedIn: null
 }
 
-export default (state = {}, action) => {
+export const login = (user) => {
+    return {
+        type: 'LOGIN',
+        user
+    }
+}
+
+export const logout = () => {
+    return {
+        type: 'LOGOUT'
+    }
+}
+
+export default (state = null, action) => {
 
     switch (action.type) {
         case 'LOGIN':

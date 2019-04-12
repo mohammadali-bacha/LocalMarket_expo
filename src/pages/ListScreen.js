@@ -59,11 +59,7 @@ export default class extends React.Component {
         {this.state.products.length === 0 && <ActivityIndicator />}
         {this.state.products.length !== 0 && (
           <Tabs renderTabBar={() => <ScrollableTab />}>
-            <Tab 
-              tabStyle={{ backgroundColor: "#a5cd39" }}
-              textStyle={{ color: "#fff" }}
-              activeTabStyle={{ backgroundColor: "#a5cd39" }}
-              activeTextStyle={{ color: "#fff", fontWeight: "normal" }}
+            <Tab
               heading="Tout">
               <List
                 onPress={this.openModal.bind(this)}
@@ -73,10 +69,6 @@ export default class extends React.Component {
             {this.state.categories.length !== 0 &&
               this.state.categories.map((category, key) => (
                 <Tab 
-                  tabStyle={{ backgroundColor: "#a5cd39" }}
-                  textStyle={{ color: "#fff" }}
-                  activeTabStyle={{ backgroundColor: "#a5cd39" }}
-                  activeTextStyle={{ color: "#fff", fontWeight: "normal" }}
                   key={key.toString()} heading={category.name}>
                   <List
                     onPress={this.openModal.bind(this)}
@@ -91,7 +83,7 @@ export default class extends React.Component {
           ref={m => (this.modal = m)}
           item={this.state.selected}
         >
-          <ProductModal item={this.state.selected} />
+          <ProductModal item={this.state.selected} setVisible={this.modal ? this.modal.setVisible.bind(this.modal) : null} />
         </Modal>
       </Container>
     );

@@ -1,22 +1,17 @@
 import React, { Component } from 'react'
 import {
   Modal,
-  Text,
   View,
-  ImageBackground,
-  ActivityIndicator
 } from 'react-native'
-import { Image } from 'react-native-elements'
-import { Item, Input } from 'native-base'
-import Quantity from './Quantity';
 
 export default class extends Component {
   state = {
     modalVisible: false
   }
 
-  setVisible(visible) {
-    this.setState({ modalVisible: visible })
+  setVisible(modalVisible) {
+    console.log(modalVisible, this)
+    this.setState({ modalVisible })
   }
 
   render() {
