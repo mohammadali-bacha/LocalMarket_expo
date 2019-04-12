@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, ActivityIndicator } from 'react-native'
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Badge from 'react-native-icon-badge'
@@ -19,6 +19,7 @@ import material, { primary, secondary } from './native-base-theme/variables/mate
 import TabIcon from './src/components/TabIcon';
 import { connect } from 'react-redux'
 import LoginScreen from './src/pages/LoginScreen';
+import { Font, AppLoading } from "expo";
 
 
 
@@ -60,14 +61,33 @@ const App = connect()(createAppContainer(TabNavigator))
 
 
 export default class extends React.Component {
+
+  state = {
+    loading: true
+  }
+
+  async componentWillMount() {
+    await Font.loadAsync({
+      Roboto: require("native-base/Fonts/Roboto.ttf"),
+      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
+    });
+    this.setState({ loading: false });
+  }
+
+
   render() {
-    return (
-      <StyleProvider style={getTheme(material)}>
-        <Provider store={store}>
-          <App />
-          <LoginScreen />
-        </Provider>
-      </StyleProvider>
-    )
+    if (this.state.loading) {
+      return <ActivityIndicator />
+    }else {
+      return (
+        <StyleProvider style={getTheme(material)}>
+            <Provider store={store}>
+              <App />
+              <LoginScreen />
+            </Provider>
+          </StyleProvider>
+      )
+    }
+    
   }
 }
