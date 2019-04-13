@@ -161,12 +161,15 @@ class AnimatedMarkers extends React.Component {
         <View style={styles.container}>
           <MapView
             style={styles.map}
-            provider={PROVIDER_GOOGLE}
+            // provider={PROVIDER_GOOGLE}
             showUserLocation
             followUserLocation
             loadingEnabled
             region={this.getMapRegion()}
           >
+            <MapView.UrlTile urlTemplate="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png" />
+
+            {/* > */}
             <Polyline
               coordinates={this.state.routeCoordinates}
               strokeWidth={5}

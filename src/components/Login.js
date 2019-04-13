@@ -95,12 +95,23 @@ class Login extends React.Component {
           </Item>
           <Item rounded style={styles.input}>
             <Input
+              secureTextEntry={true}
               placeholder="Mot de passe"
               onChange={password => this.setState({ password })}
               value={this.state.password}
             />
           </Item>
-          <Button full rounded style={styles.btn} onPress={() => this.props.login({ username: this.state.username, password: this.state.password })}>
+          <Button
+            full
+            rounded
+            style={styles.btn}
+            onPress={() =>
+              this.props.login({
+                username: this.state.username,
+                password: this.state.password
+              })
+            }
+          >
             <Text>Connexion</Text>
           </Button>
         </View>
